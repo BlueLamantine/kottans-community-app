@@ -5,7 +5,7 @@ class Render {
     this.profilesContainer = document.querySelector('.profile-cards');
   }
 
-  getHtml(profileData) {
+  getHtml (profileData) {
     const html = `
     <div class="card">
         <div class="content">
@@ -33,7 +33,7 @@ class Render {
                 <div class="icon">
                     <i class="fa fa-birthday-cake"></i>
                 </div>
-                <div class="detail">${profileData.dob.age} yers</div>
+                <div class="detail">${profileData.dob.age} years</div>
             </div>
             <div class="post ter">
                 <div class="preview">Email</div>
@@ -44,17 +44,11 @@ class Render {
             </div>
             <div class="post ter">
                 <div class="preview">Location</div>
-                <div class="icon loc">
-                    <i class="fa fa-map-marker"></i>
-                </div>
                 <div class="detail">${profileData.location.city}, 
                 ${profileData.location.country}</div>
             </div>
             <div class="post ter">
                 <div class="preview">Nation</div>
-                <div class="icon nat">
-                    <i class="fa fa-users"></i>
-                </div>
                 <div class="detail">${profileData.nat}</div>
             </div>
             <div class="post ter">
@@ -77,7 +71,6 @@ class Render {
 
   getProfile() {
     this.data.forEach(result => {
-      console.log(result);
       this.profilesContainer.insertAdjacentHTML(
         'beforeend',
         this.getHtml(result)
@@ -92,17 +85,31 @@ class Api {
     this.errorMessage = `Uh oh, something has gone wrong. Please tweet us @randomapi about the issue. Thank you.`;
   }
 
-  async getData(pageNum = 1, resNum = 9) {
+  async getData (pageNum = 1) {
     try {
       const response = await fetch(
-        this.apiURL + `?page=${pageNum}&results=${resNum}&seed=abc`
+        this.apiURL + `?page=${pageNum}&results=9&seed=abc`
       );
       if (!response.ok) throw new Error(errorMessage);
       const data = await response.json();
       new Render(data.results).getProfile();
+      document.querySelector('.loading').classList.remove('active');
+
     } catch (err) {
       console.error(err);
     }
+    this.loadByScroll();
+  }
+
+
+  loadByScroll () {
+    let pageNum = 1;
+      window.addEventListener('scroll', () => {
+        if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 5) {
+            document.querySelector('.loading').classList.add('active');
+            this.getData(++pageNum);
+        }
+      });
   }
 }
 new Api().getData();

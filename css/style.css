@@ -31,6 +31,7 @@ aside {
   grid-row-gap: 50px;
   grid-column-gap: 15px;
   padding: 15px;
+  margin-bottom: 30px;
 }
 
 .card {
@@ -145,8 +146,14 @@ aside {
   width: 50%;
   height: 100%;
   background: white;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
+.profile-photo {
+    width: 125px;
+    height: 125px;
+}
+  
 .main > .icon {
   width: 40px;
   height: 40px;
@@ -175,7 +182,6 @@ aside {
 
 .sec > .preview {
   width: 100%;
-  height: 40px;
   background: #42a5f5;
 }
 .preview,
@@ -222,7 +228,6 @@ aside {
 
 .ter > .preview {
   width: 100%;
-  padding: 10px 0px;
   background: #d4e157;
 }
 .ter > .detail {
@@ -245,7 +250,35 @@ aside {
   background: rgba(0, 0, 0, 0.2);
 }
 
-.profile-photo {
-  width: 130px;
-  height: 130px;
+.loading {
+    opacity: 0;
+    display: grid;
+    grid-auto-flow: column;
+    grid-column-start: 2;
+    transform: translateX(400px);
+}
+.loading.active {
+    opacity: 1;
+}
+.circle {
+    background-color: #fff;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    margin: 3px;
+    animation: jump 0.5s ease-in infinite;
+}
+.circle:nth-of-type(2) {
+    animation-delay: 0.1s;
+}
+.circle:nth-of-type(3) {
+    animation-delay: 0.2s;
+}
+@keyframes jump {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
 }
