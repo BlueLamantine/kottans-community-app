@@ -6,10 +6,64 @@ class Render {
   }
 
   getHtml (profileData) {
+    return `
+      <div class="user-card">
+        <div class="content">
+          <div class="profile-header">
+            <div class="protocol">
+              <div class="id-protocol icon exclamation">
+                Protocol
+                <div>6520-A44</div>
+              </div>
+              <img src="img/protocol.png" alt="User protocol" class="profile-protocol">
+            </div>
+            <div class="user-photo">
+              <img src="${profileData.picture.large}" alt="Profile photo" class="profile-photo">
+            </div>
+          </div>
+          <div class="profile-id">
+            <div class="record-id">${profileData.id.value}</div>
+            <div class="type-id">Not applicable</div>
+          </div>
+          <div class="profile-info">
+            <div class="name">
+              <div class="first-name">${profileData.name.first}</div>
+              <div class="last-name">${profileData.name.last}</div>
+            </div>
+            <div class="details">
+              <div class="alias">V</div>
+              <div class="age">${profileData.dob.age}</div>
+              <div class="gender">${profileData.gender}</div>
+            </div>
+            <div class="social">
+              <div class="tel">
+                <a href="tel:+${profileData.phone}">+${profileData.phone}</a>
+              </div>
+              <div class="mail">
+                <a href="mailto:${profileData.email}">${profileData.email}</a>
+              </div>
+            </div>
+            <div class="location">
+              <div class="country">${profileData.location.country}</div>
+              <div class="city">${profileData.location.city}</div>
+            </div>
+          </div>
+          <div class="auth">
+              <div class="code">
+                <img src="img/code.png" alt="User code" class="profile-code">
+              </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+
+ /* getHtml (profileData) {
     const html = `
     <div class="card">
         <div class="content">
-            <div class="post main">
+            <div class="main-info">
                 <div class="preview">
                     <img src="${profileData.picture.large}" alt="Profile photo" class="profile-photo">
                 </div>
@@ -68,7 +122,7 @@ class Render {
         `;
     return html;
   }
-
+*/
   getProfile() {
     this.data.forEach(result => {
       this.profilesContainer.insertAdjacentHTML(
@@ -93,23 +147,31 @@ class Api {
       if (!response.ok) throw new Error(errorMessage);
       const data = await response.json();
       new Render(data.results).getProfile();
+      console.log(data);
       document.querySelector('.loading').classList.remove('active');
 
     } catch (err) {
       console.error(err);
     }
-    this.loadByScroll();
+    this.dataObserver();
   }
 
-
-  loadByScroll () {
+    dataObserver () {
     let pageNum = 1;
-      window.addEventListener('scroll', () => {
+    
+    let loadByScroll = () => {
         if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 5) {
             document.querySelector('.loading').classList.add('active');
             this.getData(++pageNum);
         }
-      });
+    }
+    window.addEventListener('scroll', loadByScroll, false);
+
+   // document.querySelector('aside').addEventListener('click', () => {
+        //  console.log('stop');
+     //   window.removeEventListener('scroll', loadByScroll, false);
+       
+    //  });
   }
 }
 new Api().getData();
