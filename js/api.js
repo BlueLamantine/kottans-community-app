@@ -109,40 +109,46 @@ class Render {
 
   getHtmlFilter() {
     return `   
-      <div class="filter-gender">
+      <div class="filter filter-gender">
         <p>filter by gender</p>
+        <div class="radio-wrapper">
         <input type="radio" id="male" name="sort-gender">
-        <label for="male">Male</label>
+        <label for="male" class="radio-lable">Male</label>
         <input type="radio" id="female" name="sort-gender">
-        <label for="female">female</label>
+        <label for="female" class="radio-lable">female</label>
         <input type="radio" id="allGender" name="sort-gender">
-        <label for="genderAll">all</label>
+        <label for="allGender" class="radio-lable">all</label>
+        </div>
       </div>
 
-      <div class="filter-name">
+      <div class="filter filter-name">
         <p>sort by name</p>
+        <div class="radio-wrapper">
         <input type="radio" id="nameAZ" name="sort-name">
-        <label for="nameAZ">A - Z</label>
+        <label for="nameAZ" class="radio-lable">A - Z</label>
         <input type="radio" id="nameZA" name="sort-name">
-        <label for="nameZA">Z - A</label>
+        <label for="nameZA" class="radio-lable">Z - A</label>
         <input type="radio" id="allName" name="sort-name">
-        <label for="allName">default</label>
+        <label for="allName" class="radio-lable">default</label>
+        </div>
       </div>
       
-      <div class="filter-age">
+      <div class="filter filter-age">
         <p>sort by age</p>
+        <div class="radio-wrapper">
         <input type="radio" id="age09" name="sort-age">
-        <label for="age09">young - old</label>
+        <label for="age09" class="radio-lable">young - old</label>
         <input type="radio" id="age90" name="sort-age">
-        <label for="age90">old - young</label>
+        <label for="age90" class="radio-lable">old - young</label>
         <input type="radio" id="allAge" name="sort-age">
-        <label for="allAge">default</label>
+        <label for="allAge" class="radio-lable">default</label>
+        </div>
       </div>
 
       
       <div class="filter-search">
         <p>Search user by email</p>
-        <input id="nameInput" type="text" size="40">
+        <input id="nameInput" type="text" size="30" class="searchEmail icon search">
       </div>
     `;
   }

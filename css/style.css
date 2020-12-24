@@ -1,4 +1,3 @@
-
 @font-face {
   font-family: CyberPunk;
   src: url(../fonts/cp.ttf);
@@ -56,11 +55,13 @@ a {
   position: relative;
   border: 1px solid transparent;
 }
-.user-card:hover{
+.user-card:hover {
   border: 1px solid #ffffff7d;
   border-radius: 15px;
 }
-.profile-header:hover, .profile-info:hover, .profile-id:hover {
+.profile-header:hover,
+.profile-info:hover,
+.profile-id:hover {
   transform: scale(1.1);
   background-color: black;
   cursor: pointer;
@@ -122,11 +123,11 @@ a {
   padding: 2px;
   height: 50px;
 }
-.profile-id .id-info:nth-child(1){
+.profile-id .id-info:nth-child(1) {
   width: 70%;
   margin-right: 5px;
 }
-.profile-id .id-info:nth-child(2){
+.profile-id .id-info:nth-child(2) {
   width: 30%;
 }
 .user-card span {
@@ -145,7 +146,9 @@ a {
 .name .name-info:nth-child(2) {
   width: 50%;
 }
-.first-name, .gender, .age {
+.first-name,
+.gender,
+.age {
   font-size: 25px;
   font-weight: bold;
 }
@@ -154,7 +157,7 @@ a {
 }
 .details,
 .social,
-.location, 
+.location,
 .auth {
   display: flex;
 }
@@ -174,7 +177,8 @@ a {
   border-right: 1px solid #ffffff7d;
   width: 35%;
 }
-.social, .location {
+.social,
+.location {
   border-bottom: 1px solid #ffffff7d;
 }
 .location .location-info:nth-child(1) {
@@ -219,16 +223,54 @@ a {
   }
 }
 
-.filters-menu{
+.filters-menu {
   color: white;
   display: flex;
   justify-content: space-around;
   width: 100%;
- 
 }
-.sort-options{
+.sort-options {
   display: flex;
 }
 .hidden {
   display: none;
+}
+
+input[type='radio'] {
+  -webkit-appearance: none;
+  appearance: none;
+}
+.radio-lable {
+  padding: 4px 15px;
+  border: 1px solid #ffffff7d;
+}
+.radio-lable:hover {
+  cursor: pointer;
+  padding: 4px 15px;
+  border: 1px solid #b00035;
+}
+input[type='radio']:checked + .radio-lable {
+  background-color: #b00035;
+}
+.filters-menu p {
+  letter-spacing: 2px;
+  font-size: 20px;
+}
+.filter {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+}
+
+.searchEmail {
+  outline: none;
+  background: transparent;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  color: #b00035;
+}
+.searchEmail:focus{
+  border-bottom: 2px solid #b00035;
 }
