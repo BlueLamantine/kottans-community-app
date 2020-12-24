@@ -72,7 +72,7 @@ class Render {
               <div class="social-info block">
                 <span>email</span>
                 <div class="mail">
-                  <a href="mailto:${profileData.email}">${profileData.email}</a>
+                  <a href="mailto:${profileData.email}" class="user-mail">${profileData.email}</a>
                 </div>
               </div>
             </div>
@@ -141,8 +141,8 @@ class Render {
 
       
       <div class="filter-search">
-        <p>Search user by name</p>
-        <input type="text" size="40">
+        <p>Search user by email</p>
+        <input id="nameInput" type="text" size="40">
       </div>
     `;
   }
@@ -157,6 +157,7 @@ class Filter {
     this.profilesContainer = document.querySelector('.profile-cards');
     new Render().getFilters();
     this.filtersPanel = document.querySelector('#filters');
+    this.searchInput = document.querySelector('#nameInput');
     this.startFilter();
     this.sortByNameTypes = {
       type1: 'nameAZ',
@@ -180,26 +181,39 @@ class Filter {
     if (checkedRadio) checkedRadio.checked = false;
   }
 
-  selectSort(radio) {
+  selectSort(selected) {
+
+    const profileNames = document.querySelectorAll('.user-mail');
+    this.searchInput.addEventListener('input', ({ target }) => {
+      let filter = target.value.toUpperCase();
+      profileNames.forEach(nameNode => {
+        if (nameNode.textContent.toLocaleUpperCase().startsWith(filter)) {
+          nameNode.closest('.user-card').hidden = false;
+        }else {
+          nameNode.closest('.user-card').hidden = true;
+        }
+      })
+    });
+
     const sort = {
-      'sort-gender': () => this.sortByGender(radio.id),
+      'sort-gender': () => this.sortByGender(selected.id),
       'sort-name': () => {
         this.unckeckedRadioButton('sort-age');
-        this.sortByContent('.first-name', radio.id, this.sortByNameTypes);
+        this.sortByContent('.first-name', selected.id, this.sortByNameTypes);
       },
       'sort-age': () => {
         this.unckeckedRadioButton('sort-name');
 
-        this.sortByContent('.age', radio.id, this.sortByAgeTypes);
+        this.sortByContent('.age', selected.id, this.sortByAgeTypes);
       },
       default: () => false,
     };
-    return (sort[radio.name] || sort['default'])();
+    return (sort[selected.name] || sort['default'])();
   }
 
   startFilter() {
     this.filtersPanel.addEventListener('click', ({ target }) => {
-      if (target.type === 'radio') {
+      if (target.type === 'radio' || target.type === 'text') {
         loadMoreData.loadByScroll(true);
         this.selectSort(target);
       }

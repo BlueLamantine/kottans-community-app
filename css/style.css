@@ -145,6 +145,13 @@ a {
 .name .name-info:nth-child(2) {
   width: 50%;
 }
+.first-name, .gender, .age {
+  font-size: 25px;
+  font-weight: bold;
+}
+.mail {
+  font-weight: bold;
+}
 .details,
 .social,
 .location, 
