@@ -321,7 +321,13 @@ class Observer {
   }
 }
 
+
 new Api().getData();
 new Filter();
 const loadMoreData = new Observer();
 loadMoreData.loadByScroll();
+setTimeout(() => {
+  document.querySelectorAll('.preload').forEach(el => el.remove());
+  document.querySelector('body').style.setProperty('--scroll', 'auto');
+  document.querySelector('.wrapper').classList.remove('hidden');
+},7000);
