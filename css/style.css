@@ -22,6 +22,14 @@ body {
   width: 100%;
   background-color: transparent;
 }
+.menu-toggle {
+  color: #fff;
+  position: absolute;
+  right: 50px;
+  font-size: 30px;
+  cursor: pointer;
+  display: none;
+}
 .kottans-header {
   display: flex;
   justify-content: center;
@@ -68,7 +76,6 @@ a {
 
 .user-card {
   font-family: Roboto;
-  position: relative;
   border: 1px solid transparent;
 }
 .user-card:hover {
@@ -277,8 +284,12 @@ input[type='radio']:checked + .radio-lable {
   flex-direction: column;
   justify-items: center;
   align-items: center;
+  background-color: black;
+  padding-bottom: 5px;
 }
-
+.filter-search {
+  padding-bottom: 50px;
+}
 .searchEmail {
   outline: none;
   background: transparent;
@@ -340,5 +351,31 @@ input[type='radio']:checked + .radio-lable {
 @keyframes fadeInText {
   100% {
     opacity: 1;
+  }
+}
+.radio-wrapper {
+  display: flex;
+}
+
+@media (max-width: 991px) {
+  .menu-toggle {
+    display: block;
+  }
+  .filters-menu {
+    position: absolute;
+    width: 100%;
+    height: calc(100vh - 50px);
+    top: 10px;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    transition: 0.5s;
+    left: -100%;
+  }
+  .filters-menu.active {
+    left: 0;
+  }
+.profile-photo {  
+    filter: none;
   }
 }

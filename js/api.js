@@ -143,7 +143,7 @@ class Render {
       </div>
 
       
-      <div class="filter-search">
+      <div class="filter filter-search">
         <p>Search user by email</p>
         <input id="nameInput" type="text" size="30" class="searchEmail icon search">
       </div>
@@ -305,6 +305,9 @@ class Observer {
         new Api().getData(++this.startPage);
       }
     };
+    document.querySelector('#menu').addEventListener('click', () => {
+      document.querySelector('#filters').classList.toggle('active');
+    });
   }
 
   loadByScroll(loadingStop) {
