@@ -1,4 +1,3 @@
-
 class Render {
   constructor(results, info) {
     this.data = results;
@@ -186,17 +185,16 @@ class Filter {
   }
 
   selectSort(selected) {
-
     const profileNames = document.querySelectorAll('.user-mail');
     this.searchInput.addEventListener('input', ({ target }) => {
       let filter = target.value.toUpperCase();
       profileNames.forEach(nameNode => {
         if (nameNode.textContent.toLocaleUpperCase().startsWith(filter)) {
           nameNode.closest('.user-card').hidden = false;
-        }else {
+        } else {
           nameNode.closest('.user-card').hidden = true;
         }
-      })
+      });
     });
 
     const sort = {
@@ -248,8 +246,7 @@ class Filter {
   sortBySelector(selectorName) {
     const cards = document.querySelectorAll('.user-card');
     if (selectorName === 'all') {
-     return Array.from(cards).sort((a, b) =>
-      a.id.localeCompare(b.id));
+      return Array.from(cards).sort((a, b) => a.id.localeCompare(b.id));
     }
     return Array.from(cards).sort((a, b) =>
       a
@@ -265,8 +262,8 @@ class Filter {
         this.insertSortedProfiles(sortedCards, 'lastChild'),
       [sortTypes.type2]: () =>
         this.insertSortedProfiles(sortedCards, 'firstChild'),
-      [sortTypes.type3]: () => 
-      this.insertSortedProfiles(this.sortBySelector('all'), 'lastChild'),
+      [sortTypes.type3]: () =>
+        this.insertSortedProfiles(this.sortBySelector('all'), 'lastChild'),
       default: () => false,
     };
     return (typeOfSort[sortType] || typeOfSort['default'])();
@@ -329,5 +326,4 @@ setTimeout(() => {
   document.querySelector('#preload').remove();
   document.querySelector('body').style.setProperty('--scroll', 'auto');
   document.querySelector('.wrapper').classList.remove('hidden');
-},7000);
-
+}, 7000);

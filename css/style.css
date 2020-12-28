@@ -3,7 +3,7 @@
   src: url(../fonts/cp.ttf);
 }
 :root {
-  --scroll : hidden;
+  --scroll: hidden;
 }
 body {
   font-variant: all-petite-caps;
@@ -298,7 +298,7 @@ input[type='radio']:checked + .radio-lable {
   border-right: none;
   color: #b00035;
 }
-.searchEmail:focus{
+.searchEmail:focus {
   border-bottom: 2px solid #b00035;
 }
 
@@ -344,7 +344,7 @@ input[type='radio']:checked + .radio-lable {
 
 @keyframes scaleImage {
   100% {
-      transform: scale(1);
+    transform: scale(1);
   }
 }
 
@@ -375,7 +375,7 @@ input[type='radio']:checked + .radio-lable {
   .filters-menu.active {
     left: 0;
   }
-.profile-photo {  
+  .profile-photo {
     filter: none;
   }
 }
