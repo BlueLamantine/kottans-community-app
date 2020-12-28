@@ -1,3 +1,4 @@
+
 class Render {
   constructor(results, info) {
     this.data = results;
@@ -216,7 +217,7 @@ class Filter {
   startFilter() {
     this.filtersPanel.addEventListener('click', ({ target }) => {
       if (target.type === 'radio' || target.type === 'text') {
-        loadMoreData.loadByScroll(true);
+        loadMoreData.loadDataByScroll(true);
         this.selectSort(target);
       }
     });
@@ -289,6 +290,7 @@ class Api {
       document.querySelector('.loading').classList.remove('active');
     } catch (err) {
       console.error(err);
+      alert(err);
     }
   }
 }
@@ -310,7 +312,7 @@ class Observer {
     });
   }
 
-  loadByScroll(loadingStop) {
+  loadDataByScroll(loadingStop) {
     if (loadingStop) {
       window.removeEventListener('scroll', this.loading);
       return;
@@ -319,13 +321,13 @@ class Observer {
   }
 }
 
-
 new Api().getData();
 new Filter();
 const loadMoreData = new Observer();
-loadMoreData.loadByScroll();
+loadMoreData.loadDataByScroll();
 setTimeout(() => {
   document.querySelector('#preload').remove();
   document.querySelector('body').style.setProperty('--scroll', 'auto');
   document.querySelector('.wrapper').classList.remove('hidden');
 },7000);
+
