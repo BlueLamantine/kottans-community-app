@@ -8,10 +8,7 @@ class Render {
 
   getHtmlProfile(profileData, index) {
     return `
-      <div class="user-card">
-        <div class="card-info" hidden>
-          user${this.info.page}-${index}
-        </div>
+      <div id="P${this.info.page}I${index}" class="user-card">
         <div class="content">
           <div class="profile-header">
             <div class="protocol">
@@ -128,8 +125,8 @@ class Render {
         <label for="nameAZ" class="radio-lable">A - Z</label>
         <input type="radio" id="nameZA" name="sort-name">
         <label for="nameZA" class="radio-lable">Z - A</label>
-        <input type="radio" id="allName" name="sort-name">
-        <label for="allName" class="radio-lable">default</label>
+        <input type="radio" id="nameAll" name="sort-name">
+        <label for="nameAll" class="radio-lable">default</label>
         </div>
       </div>
       
@@ -140,8 +137,8 @@ class Render {
         <label for="age09" class="radio-lable">young - old</label>
         <input type="radio" id="age90" name="sort-age">
         <label for="age90" class="radio-lable">old - young</label>
-        <input type="radio" id="allAge" name="sort-age">
-        <label for="allAge" class="radio-lable">default</label>
+        <input type="radio" id="ageAll" name="sort-age">
+        <label for="ageAll" class="radio-lable">default</label>
         </div>
       </div>
 
@@ -168,12 +165,12 @@ class Filter {
     this.sortByNameTypes = {
       type1: 'nameAZ',
       type2: 'nameZA',
-      type3: 'allName',
+      type3: 'nameAll',
     };
     this.sortByAgeTypes = {
       type1: 'age09',
       type2: 'age90',
-      type3: 'allAge',
+      type3: 'ageAll',
     };
   }
 
@@ -209,7 +206,6 @@ class Filter {
       },
       'sort-age': () => {
         this.unckeckedRadioButton('sort-name');
-
         this.sortByContent('.age', selected.id, this.sortByAgeTypes);
       },
       default: () => false,
@@ -250,16 +246,15 @@ class Filter {
 
   sortBySelector(selectorName) {
     const cards = document.querySelectorAll('.user-card');
+    if (selectorName === 'all') {
+     return Array.from(cards).sort((a, b) =>
+      a.id.localeCompare(b.id));
+    }
     return Array.from(cards).sort((a, b) =>
       a
         .querySelector(selectorName)
         .textContent.localeCompare(b.querySelector(selectorName).textContent)
     );
-  }
-
-  sortByDefault() {
-    const sortedCards = this.sortBySelector('.card-info');
-    this.insertSortedProfiles(sortedCards, 'lastChild');
   }
 
   sortByContent(sortSelector, sortType, sortTypes) {
@@ -269,7 +264,8 @@ class Filter {
         this.insertSortedProfiles(sortedCards, 'lastChild'),
       [sortTypes.type2]: () =>
         this.insertSortedProfiles(sortedCards, 'firstChild'),
-      [sortTypes.type3]: () => this.sortByDefault(),
+      [sortTypes.type3]: () => 
+      this.insertSortedProfiles(this.sortBySelector('all'), 'lastChild'),
       default: () => false,
     };
     return (typeOfSort[sortType] || typeOfSort['default'])();
@@ -290,7 +286,6 @@ class Api {
       if (!response.ok) throw new Error(errorMessage);
       const data = await response.json();
       new Render(data.results, data.info).getProfiles();
-      console.log(data);
       document.querySelector('.loading').classList.remove('active');
     } catch (err) {
       console.error(err);
