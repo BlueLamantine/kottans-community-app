@@ -17,6 +17,11 @@ body {
   padding: 0;
   margin: 0;
 }
+.preload-animation {
+  height: 100vh;
+  width: 100%;
+  background-color: transparent;
+}
 .kottans-header {
   display: flex;
   justify-content: center;
